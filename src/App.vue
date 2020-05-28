@@ -14,3 +14,12 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class App extends Vue {}
 </script>
+
+<style lang="scss">
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+</style>

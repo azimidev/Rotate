@@ -20,17 +20,19 @@ export default new Vuex.Store({
     all: [
       {
         id: 1,
-        name: "In Two Minds Facial Cleanser",
+        name: "Aesop Skin In Two Minds Facial Cleanser 100 Ml",
         description:
           "A gentle gel-based formulation that cleanses thoroughly without drying the skin or stripping its natural oils.",
-        price: 399
+        price: 399,
+        img: "Aesop-Skin-In-Two-Minds-Facial-Cleanser-100mL-Large-835x962px.png"
       },
       {
         id: 2,
-        name: "Product Two",
+        name: "Aesop skin in two minds facial cleanser 200 Ml",
         description:
           "Watch TV like never before with the brand new curved screen technology",
-        price: 1995
+        price: 1995,
+        img: "Aesop-Skin-In-Two-Minds-Facial-Cleanser-200mL-Large-835x962px.png"
       }
     ]
   },
