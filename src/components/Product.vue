@@ -6,10 +6,7 @@
       </h1>
     </div>
     <div class="column">
-      <img
-        src="@/assets/Aesop-Skin-In-Two-Minds-Facial-Cleanser-100mL-Large-835x962px.png"
-        alt=""
-      />
+      <img :src="getImg(product.img)" :alt="product.img" />
       <div class="control has-text-centered">
         <label class="radio">
           <input type="radio" name="answer" />
@@ -44,6 +41,11 @@ import ProductModel from "@/models/ProductModel";
 @Component
 export default class Product extends Vue {
   @Prop({ required: true }) private product!: Array<ProductModel>;
+
+  getImg(product: string) {
+    const images = require.context("../assets/");
+    return images("./" + product);
+  }
 }
 </script>
 
