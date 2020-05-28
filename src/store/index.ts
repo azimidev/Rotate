@@ -7,6 +7,11 @@ Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== "production";
 
+/* NOTE:
+ *  I have used single file store because the app is simple,
+ *  Otherwise, I would have used module approach.
+ */
+
 export default new Vuex.Store({
   strict: debug,
 
@@ -37,6 +42,12 @@ export default new Vuex.Store({
     ]
   },
 
+  actions: {
+    addToCart({ commit }, product) {
+      commit(types.ADD_TO_CART, { id: product.id });
+    }
+  },
+
   mutations: {
     [types.ADD_TO_CART](state, { id }) {
       const record = state.added.find(product => product.id === id);
@@ -51,14 +62,6 @@ export default new Vuex.Store({
     }
   },
 
-  actions: {
-    addToCart({ commit }, product) {
-      commit(types.ADD_TO_CART, { id: product.id });
-    }
-  },
-
-  modules: {},
-
   getters: {
     allProducts: state => state.all, // would need action/mutation if data fetched async
     getNumberOfProducts: state => (state.all ? state.all.length : 0),
@@ -68,9 +71,11 @@ export default new Vuex.Store({
         return {
           name: product?.name,
           price: product?.price,
-          quantity: quantity
+          quantity
         };
       });
     }
-  }
+  },
+
+  modules: {}
 });
