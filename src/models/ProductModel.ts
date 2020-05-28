@@ -4,4 +4,5 @@ export default class ProductModel {
   description?: string;
   price!: number;
   img?: string;
+  size?: string;
 }

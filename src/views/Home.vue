@@ -2,8 +2,23 @@
   <section>
     <div class="hero-body is-fullheight">
       <div class="container">
-        <div class="columns" v-for="product in products" :key="product.id">
-          <Product :product="product" />
+        <div class="columns">
+          <Product :product.sync="activeProduct" />
+        </div>
+        <div class="control has-text-centered">
+          <label
+            class="radio"
+            v-for="(product, index) in products"
+            :key="index"
+          >
+            <input
+              type="radio"
+              name="answer"
+              @change="updateProduct(product)"
+              :checked="product.id === activeProduct.id"
+            />
+            {{ product.size }}
+          </label>
         </div>
       </div>
     </div>
@@ -19,12 +34,11 @@ import { Component, Vue } from "vue-property-decorator";
   components: { Product, Cart }
 })
 export default class Home extends Vue {
-  get products() {
-    return this.$store.getters.products;
-  }
+  products = this.$store.getters.products;
+  activeProduct = this.products[0];
 
-  get getNumberOfProducts() {
-    return this.$store.getters.getNumberOfProducts;
+  updateProduct(product) {
+    this.activeProduct = product;
   }
 }
 </script>

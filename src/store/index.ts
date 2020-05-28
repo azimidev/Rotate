@@ -24,7 +24,9 @@ export default new Vuex.Store({
         description:
           "A gentle gel-based formulation that cleanses thoroughly without drying the skin or stripping its natural oils.",
         price: 399,
-        img: "Aesop-Skin-In-Two-Minds-Facial-Cleanser-100mL-Large-835x962px.png"
+        img:
+          "Aesop-Skin-In-Two-Minds-Facial-Cleanser-100mL-Large-835x962px.png",
+        size: "100 mL"
       },
       {
         id: 2,
@@ -32,7 +34,9 @@ export default new Vuex.Store({
         description:
           "Watch TV like never before with the brand new curved screen technology",
         price: 1995,
-        img: "Aesop-Skin-In-Two-Minds-Facial-Cleanser-200mL-Large-835x962px.png"
+        img:
+          "Aesop-Skin-In-Two-Minds-Facial-Cleanser-200mL-Large-835x962px.png",
+        size: "200 mL"
       }
     ]
   },

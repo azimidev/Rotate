@@ -7,16 +7,6 @@
     </div>
     <div class="column">
       <img :src="getImg(product.img)" :alt="product.img" />
-      <div class="control has-text-centered">
-        <label class="radio">
-          <input type="radio" name="answer" />
-          Yes
-        </label>
-        <label class="radio">
-          <input type="radio" name="answer" />
-          No
-        </label>
-      </div>
     </div>
     <div class="column">
       <h3 class="title">
