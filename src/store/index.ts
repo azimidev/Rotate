@@ -20,24 +20,17 @@ export default new Vuex.Store({
     all: [
       {
         id: 1,
-        name: "COBOL 101 vintage",
-        description: "Learn COBOL with this vintage programming book",
+        name: "In Two Minds Facial Cleanser",
+        description:
+          "A gentle gel-based formulation that cleanses thoroughly without drying the skin or stripping its natural oils.",
         price: 399
       },
       {
         id: 2,
-        name: "Sharp C2719 curved TV",
+        name: "Product Two",
         description:
           "Watch TV like never before with the brand new curved screen technology",
         price: 1995
-      },
-      {
-        id: 3,
-        name: "Remmington X mechanical keyboard",
-        description:
-          "Excellent for gaming and typing, this Remmington X keyboard " +
-          "features tactile, clicky switches for speed and accuracy",
-        price: 595
       }
     ]
   },
