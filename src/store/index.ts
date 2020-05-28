@@ -58,7 +58,7 @@ export default new Vuex.Store({
   },
 
   getters: {
-    allProducts: state => state.all, // would need action/mutation if data fetched async
+    products: state => state.all, // would need action/mutation if data fetched async
     getNumberOfProducts: state => (state.all ? state.all.length : 0),
     cartProducts: state => {
       return state.added.map(({ id, quantity }) => {
