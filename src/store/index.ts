@@ -72,6 +72,7 @@ export default new Vuex.Store({
     [types.REMOVE_FROM_CART](state, { product }) {
       const index = state.cart.map(item => item.id).indexOf(product.id);
       state.cart.splice(index, 1);
+      state.cartItems -= product.quantity;
     }
   },
 
