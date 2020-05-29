@@ -34,22 +34,19 @@
 import { Component, Mixins, Prop } from "vue-property-decorator";
 import ProductModel from "@/models/ProductModel";
 import CartModel from "@/models/CartModel";
-import Delay from "@/mixins/Delay";
+// Cannot use @ with ts modules
+import Delay from "../mixins/Delay";
+import Currency from "../mixins/Currency";
 
 @Component
-export default class Product extends Mixins(Delay) {
+export default class Product extends Mixins(Delay, Currency) {
   @Prop({ required: true }) product!: Array<ProductModel>;
 
   disabled = false;
 
-  getImg(product: string) {
+  getImg(product: ProductModel) {
     const images = require.context("../assets/");
     return images("./" + product);
-  }
-
-  currency(price: number) {
-    const currency = "£";
-    return currency + price / 100;
   }
 
   async addToCart(product: ProductModel) {
@@ -72,7 +69,7 @@ export default class Product extends Mixins(Delay) {
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
-    await this.delay(2);
+    await this.delay();
     // enable the button
     this.disabled = false;
   }
