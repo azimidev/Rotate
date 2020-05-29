@@ -26,11 +26,10 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Product from "@/components/Product.vue";
-import Cart from "@/components/Cart.vue";
 import ProductModel from "@/models/ProductModel";
 
 @Component({
-  components: { Product, Cart }
+  components: { Product }
 })
 export default class Home extends Vue {
   products: Array<ProductModel> = this.$store.getters.products;

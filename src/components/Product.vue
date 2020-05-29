@@ -67,8 +67,7 @@ export default class Product extends Mixins(Delay, Currency) {
       )
     );
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
+    // delay for 1 sec
     await this.delay();
     // enable the button
     this.disabled = false;

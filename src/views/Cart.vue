@@ -6,9 +6,9 @@
         <p v-show="!products.length">
           <b>Your cart is empty!</b>
           <br />
-          <router-link class="button is-light mt-20" to="/"
-            >Go shopping</router-link
-          >
+          <router-link class="button is-light mt-20" to="/">
+            Go shopping
+          </router-link>
         </p>
         <table class="table is-striped" v-show="products.length">
           <thead>
@@ -20,12 +20,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(p, i) in products" :key="i">
-              <td>{{ p.name }}</td>
-              <td>{{ currency(p.price) }}</td>
-              <td>{{ p.quantity }}</td>
-              <td><a @click="removeFromCart(p)">Remove</a></td>
-            </tr>
+            <template v-for="(product, i) in products">
+              <CartItem :product="product" :key="i" />
+            </template>
             <tr>
               <td><b>Total:</b></td>
               <td></td>
@@ -52,9 +49,10 @@
 <script lang="ts">
 import { Component, Mixins } from "vue-property-decorator";
 import Currency from "../mixins/Currency";
-import ProductModel from "@/models/ProductModel";
-
-@Component
+import CartItem from "@/components/CartItem.vue";
+@Component({
+  components: { CartItem }
+})
 export default class Cart extends Mixins(Currency) {
   get cartItems() {
     return this.$store.getters.cartItems;
@@ -73,14 +71,8 @@ export default class Cart extends Mixins(Currency) {
     );
   }
 
-  removeFromCart(product: ProductModel) {
-    this.$store.dispatch("removeFromCart", product);
-  }
-
   checkout() {
     alert(`Please pay us ${this.currency(this.total)}`);
   }
 }
 </script>
-
-<style scoped lang="scss"></style>
