@@ -16,6 +16,7 @@
               <td>Name</td>
               <td>Price</td>
               <td>Quantity</td>
+              <td></td>
             </tr>
           </thead>
           <tbody>
@@ -23,6 +24,7 @@
               <td>{{ p.name }}</td>
               <td>{{ currency(p.price) }}</td>
               <td>{{ p.quantity }}</td>
+              <td><a @click="removeFromCart(p)">Remove</a></td>
             </tr>
             <tr>
               <td><b>Total:</b></td>
@@ -50,6 +52,7 @@
 <script lang="ts">
 import { Component, Mixins } from "vue-property-decorator";
 import Currency from "../mixins/Currency";
+import ProductModel from "@/models/ProductModel";
 
 @Component
 export default class Cart extends Mixins(Currency) {
@@ -68,6 +71,10 @@ export default class Cart extends Mixins(Currency) {
       },
       0
     );
+  }
+
+  removeFromCart(product: ProductModel) {
+    this.$store.dispatch("removeFromCart", product);
   }
 
   checkout() {
