@@ -1,5 +1,5 @@
 <template>
-  <div class="is-inline-flex">
+  <div class="columns">
     <div class="column">
       <h1 class="subtitle">
         {{ product.name }}
@@ -20,8 +20,11 @@
       <button
         class="button is-fullwidth is-dark is-large mt-20"
         @click="addToCart(product)"
+        :disabled="disabled"
       >
-        Add to your cart &mdash; {{ currency(product.price) }}
+        <span v-if="!disabled"
+          >Add to your cart - {{ currency(product.price) }}</span
+        ><span v-else>Adding to cart</span>
       </button>
     </div>
   </div>
@@ -34,7 +37,9 @@ import CartModel from "@/models/CartModel";
 
 @Component
 export default class Product extends Vue {
-  @Prop({ required: true }) private product!: Array<ProductModel>;
+  @Prop({ required: true }) product!: Array<ProductModel>;
+
+  disabled = false;
 
   getImg(product: string) {
     const images = require.context("../assets/");
@@ -46,12 +51,19 @@ export default class Product extends Vue {
     return currency + price / 100;
   }
 
-  addToCart(product: ProductModel) {
+  delay(seconds = 1) {
+    return new Promise(resolve => setTimeout(() => resolve(), seconds * 1000));
+  }
+
+  async addToCart(product: ProductModel) {
+    // disable the button
+    this.disabled = true;
+
     // Add the product to the cart
-    this.$store.dispatch("addToCart", product);
+    await this.$store.dispatch("addToCart", product);
 
     // Update total
-    this.$store.dispatch(
+    await this.$store.dispatch(
       "updateCartItems",
       this.$store.getters.cartProducts.reduce(
         (accum: number, item: CartModel) => {
@@ -60,6 +72,11 @@ export default class Product extends Vue {
         0
       )
     );
+
+    // delay enabling the button for 1 second
+    await this.delay(2);
+    // enable the button
+    this.disabled = false;
   }
 }
 </script>

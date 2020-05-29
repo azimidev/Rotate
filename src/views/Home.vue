@@ -1,10 +1,8 @@
 <template>
-  <section>
-    <div class="hero-body is-fullheight">
+  <section class="hero is-fullheight is-vcentered">
+    <div class="hero-body">
       <div class="container">
-        <div class="columns">
-          <Product :product.sync="activeProduct" />
-        </div>
+        <Product :product.sync="activeProduct" />
         <div class="control has-text-centered">
           <label
             class="radio"
