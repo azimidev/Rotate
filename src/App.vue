@@ -22,4 +22,7 @@ export default class App extends Vue {}
 .mt-20 {
   margin-top: 20px;
 }
+.ml-5 {
+  margin-left: 5px;
+}
 </style>

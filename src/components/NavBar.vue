@@ -1,8 +1,15 @@
 <template>
-  <nav class="navbar is-dark is-bold" role="navigation" aria-label="main navigation">
+  <nav
+    class="navbar is-dark is-bold"
+    role="navigation"
+    aria-label="main navigation"
+  >
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/">Home</router-link>
-      <router-link class="navbar-item" to="/cart">Cart</router-link>
+      <router-link class="navbar-item" to="/cart">
+        Cart
+        <strong class="tag is-rounded is-primary ml-5">{{ total }}</strong>
+      </router-link>
     </div>
   </nav>
 </template>
@@ -11,7 +18,11 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class NavBar extends Vue {}
+export default class NavBar extends Vue {
+  get total() {
+    return this.$store.getters.cartItems;
+  }
+}
 </script>
 
 <style scoped lang="scss"></style>

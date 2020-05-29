@@ -16,24 +16,25 @@ export default new Vuex.Store({
   strict: debug,
 
   state: {
-    added: Array<CartModel>(),
-    all: [
+    cart: Array<CartModel>(),
+    cartItems: 0,
+    products: [
       {
         id: 1,
-        name: "Aesop Skin In Two Minds Facial Cleanser 100 Ml",
+        name: "Aesop Skin In Two Minds Facial Cleanser",
         description:
           "A gentle gel-based formulation that cleanses thoroughly without drying the skin or stripping its natural oils.",
-        price: 399,
+        price: 2300,
         img:
           "Aesop-Skin-In-Two-Minds-Facial-Cleanser-100mL-Large-835x962px.png",
         size: "100 mL"
       },
       {
         id: 2,
-        name: "Aesop skin in two minds facial cleanser 200 Ml",
+        name: "Aesop Skin In Two Minds Facial Cleanser",
         description:
-          "Watch TV like never before with the brand new curved screen technology",
-        price: 1995,
+          "A gentle gel-based formulation that cleanses thoroughly without drying the skin or stripping its natural oils.",
+        price: 3500,
         img:
           "Aesop-Skin-In-Two-Minds-Facial-Cleanser-200mL-Large-835x962px.png",
         size: "200 mL"
@@ -44,29 +45,38 @@ export default new Vuex.Store({
   actions: {
     addToCart({ commit }, product) {
       commit(types.ADD_TO_CART, { id: product.id });
+    },
+    updateCartItems({ commit }, quantity) {
+      commit(types.UPDATE_CART_QUANTITY, { quantity: quantity });
     }
   },
 
   mutations: {
     [types.ADD_TO_CART](state, { id }) {
-      const record = state.added.find(product => product.id === id);
+      const record = state.cart.find(product => product.id === id);
       if (!record) {
-        state.added.push({
+        state.cart.push({
           id,
           quantity: 1
         });
       } else {
         record.quantity++;
       }
+    },
+    [types.UPDATE_CART_QUANTITY](state, { quantity }) {
+      console.log(quantity);
+      state.cartItems = quantity;
     }
   },
 
   getters: {
-    products: state => state.all, // would need action/mutation if data fetched async
-    getNumberOfProducts: state => (state.all ? state.all.length : 0),
+    products: state => state.products,
+
+    cartItems: state => state.cartItems,
+
     cartProducts: state => {
-      return state.added.map(({ id, quantity }) => {
-        const product = state.all.find(p => p.id === id);
+      return state.cart.map(({ id, quantity }) => {
+        const product = state.products.find(p => p.id === id);
         return {
           name: product?.name,
           price: product?.price,

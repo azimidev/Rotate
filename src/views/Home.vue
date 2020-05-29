@@ -25,19 +25,20 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import Product from "@/components/Product.vue";
 import Cart from "@/components/Cart.vue";
-import { Component, Vue } from "vue-property-decorator";
+import ProductModel from "@/models/ProductModel";
 
 @Component({
   components: { Product, Cart }
 })
 export default class Home extends Vue {
-  products = this.$store.getters.products;
-  activeProduct = this.products[0];
+  products: Array<ProductModel> = this.$store.getters.products;
+  activeProduct: ProductModel = this.products[0];
 
-  updateProduct(product) {
+  updateProduct(product: ProductModel) {
     this.activeProduct = product;
   }
 }
