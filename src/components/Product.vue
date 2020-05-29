@@ -31,12 +31,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Mixins, Prop } from "vue-property-decorator";
 import ProductModel from "@/models/ProductModel";
 import CartModel from "@/models/CartModel";
+import Delay from "@/mixins/Delay";
 
 @Component
-export default class Product extends Vue {
+export default class Product extends Mixins(Delay) {
   @Prop({ required: true }) product!: Array<ProductModel>;
 
   disabled = false;
@@ -49,10 +50,6 @@ export default class Product extends Vue {
   currency(price: number) {
     const currency = "£";
     return currency + price / 100;
-  }
-
-  delay(seconds = 1) {
-    return new Promise(resolve => setTimeout(() => resolve(), seconds * 1000));
   }
 
   async addToCart(product: ProductModel) {
@@ -73,7 +70,8 @@ export default class Product extends Vue {
       )
     );
 
-    // delay enabling the button for 1 second
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     await this.delay(2);
     // enable the button
     this.disabled = false;

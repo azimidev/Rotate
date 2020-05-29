@@ -64,7 +64,6 @@ export default new Vuex.Store({
       }
     },
     [types.UPDATE_CART_QUANTITY](state, { quantity }) {
-      console.log(quantity);
       state.cartItems = quantity;
     }
   },
