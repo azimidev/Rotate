@@ -4,8 +4,8 @@
     <td>{{ currency(product.price) }}</td>
     <td>
       <label class="select is-small">
-        <select name="quantity" @change="updateQuantity(product.quantity)">
-          <option v-for="i in 5" :key="i" :selected="product.quantity === i">
+        <select @change="updateQuantity($event.target.value)" name="quantity">
+          <option :key="i" :selected="quantity === i" v-for="i in 5">
             {{ i }}
           </option>
         </select>
@@ -26,8 +26,19 @@ import Currency from "../mixins/Currency";
 export default class CartItem extends Mixins(Currency) {
   @Prop({ required: true }) product!: Array<ProductModel>;
 
+  quantity = this.product.quantity;
+
+  mounted() {
+    this.quantity = this.$store.getters.cart.find(
+      product => product.id === this.product.id
+    ).quantity;
+  }
+
   updateQuantity(quantity: number) {
-    console.log(quantity);
+    this.$store.dispatch("updateItemQuantity", {
+      id: this.product.id,
+      quantity
+    });
   }
 
   removeFromCart(product: Array) {
@@ -36,4 +47,4 @@ export default class CartItem extends Mixins(Currency) {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss" scoped></style>

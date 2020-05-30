@@ -51,6 +51,9 @@ export default new Vuex.Store({
     },
     removeFromCart({ commit }, product) {
       commit(types.REMOVE_FROM_CART, { product });
+    },
+    updateItemQuantity({ commit }, { id, quantity }) {
+      commit(types.UPDATE_ITEM_QUANTITY, { id, quantity });
     }
   },
 
@@ -73,6 +76,10 @@ export default new Vuex.Store({
       const index = state.cart.map(item => item.id).indexOf(product.id);
       state.cart.splice(index, 1);
       state.cartItems -= product.quantity;
+    },
+    [types.UPDATE_ITEM_QUANTITY](state, { id, quantity }) {
+      const index = state.cart.findIndex(item => item.id === id);
+      state.cart[index].quantity = parseInt(quantity);
     }
   },
 
@@ -80,6 +87,8 @@ export default new Vuex.Store({
     products: state => state.products,
 
     cartItems: state => state.cartItems,
+
+    cart: state => state.cart,
 
     cartProducts: state => {
       return state.cart.map(({ id, quantity }) => {
