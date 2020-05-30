@@ -36,7 +36,7 @@ export default class CartItem extends Mixins(Currency) {
 
   updateQuantity(quantity: number) {
     this.$store.dispatch("updateItemQuantity", {
-      id: this.product.id,
+      product: this.product,
       quantity: parseInt(quantity)
     });
   }

@@ -52,8 +52,8 @@ export default new Vuex.Store({
     removeFromCart({ commit }, product) {
       commit(types.REMOVE_FROM_CART, { product });
     },
-    updateItemQuantity({ commit }, { id, quantity }) {
-      commit(types.UPDATE_ITEM_QUANTITY, { id, quantity });
+    updateItemQuantity({ commit }, { product, quantity }) {
+      commit(types.UPDATE_ITEM_QUANTITY, { product, quantity });
     }
   },
 
@@ -77,8 +77,13 @@ export default new Vuex.Store({
       state.cart.splice(index, 1);
       state.cartQuantity -= product.quantity;
     },
-    [types.UPDATE_ITEM_QUANTITY](state, { id, quantity }) {
-      const index = state.cart.findIndex(item => item.id === id);
+    [types.UPDATE_ITEM_QUANTITY](state, { product, quantity }) {
+      const index = state.cart.findIndex(item => item.id === product.id);
+      if (quantity > product.quantity) {
+        state.cartQuantity += quantity - product.quantity;
+      } else if (quantity < product.quantity) {
+        state.cartQuantity -= product.quantity - quantity;
+      }
       state.cart[index].quantity = quantity;
     }
   },
