@@ -4,7 +4,7 @@
     role="navigation"
     aria-label="main navigation"
   >
-    <div class="navbar-brand is-flex">
+    <div class="navbar-brand is-flex container">
       <router-link class="navbar-item" to="/">Home</router-link>
       <a @click="toggleCart" class="navbar-item">
         Cart
@@ -31,6 +31,7 @@ export default class NavBar extends Vue {
 
 <style lang="scss" scoped>
 .navbar-brand {
+  width: 100%;
   justify-content: space-between;
 }
 </style>
