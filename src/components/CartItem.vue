@@ -5,7 +5,7 @@
     <td>
       <label class="select is-small">
         <select @change="updateQuantity($event.target.value)" name="quantity">
-          <option :key="i" :selected="quantity === i" v-for="i in 5">
+          <option :key="i" :selected="quantity === i" v-for="i in quantity + 5">
             {{ i }}
           </option>
         </select>
