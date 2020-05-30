@@ -19,14 +19,12 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class NavBar extends Vue {
-  showCart = this.$store.getters.toggleCart;
-
   get total() {
     return this.$store.getters.cartQuantity;
   }
 
   toggleCart() {
-    this.$store.dispatch("toggleCart", (this.showCart = !this.showCart));
+    return this.$store.dispatch("toggleCart", !this.$store.state.toggleCart);
   }
 }
 </script>

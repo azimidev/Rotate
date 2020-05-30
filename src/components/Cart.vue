@@ -1,5 +1,6 @@
 <template>
   <section class="hero is-dark is-bold">
+    <a @click.prevent="closeCart" class="delete is-large"></a>
     <div class="hero-body">
       <div class="container">
         <p v-show="!products.length">
@@ -66,6 +67,10 @@ export default class Cart extends Mixins(Currency) {
     );
   }
 
+  closeCart() {
+    this.$store.dispatch("toggleCart", false);
+  }
+
   checkout() {
     alert(`Please pay us ${this.currency(this.total)}`);
     // TODO: clear the cart
@@ -81,5 +86,10 @@ export default class Cart extends Mixins(Currency) {
   td {
     color: lightgray;
   }
+}
+.delete {
+  position: absolute;
+  right: 0;
+  background-color: transparent;
 }
 </style>

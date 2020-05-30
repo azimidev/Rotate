@@ -12,9 +12,9 @@
       </label>
     </td>
     <td>
-      <a class="has-text-white display-on-hover" @click="removeFromCart(cart)"
-        >Remove</a
-      >
+      <a class="has-text-white display-on-hover" @click="removeFromCart(cart)">
+        Remove
+      </a>
     </td>
   </tr>
 </template>
