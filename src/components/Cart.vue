@@ -5,10 +5,6 @@
       <div class="container">
         <p v-show="!products.length">
           <b>Your cart is empty!</b>
-          <br />
-          <router-link class="button is-light mt-20" to="/">
-            Go shopping
-          </router-link>
         </p>
         <table class="table is-fullwidth" v-show="products.length">
           <thead>
@@ -50,10 +46,18 @@
 import { Component, Mixins } from "vue-property-decorator";
 import Currency from "@/mixins/Currency";
 import CartItem from "@/components/CartItem.vue";
+import Delay from "@/mixins/Delay";
 @Component({
   components: { CartItem }
 })
-export default class Cart extends Mixins(Currency) {
+export default class Cart extends Mixins(Currency, Delay) {
+  async mounted() {
+    if (!this.products.length) {
+      await this.delay(1);
+      this.closeCart();
+    }
+  }
+
   get products() {
     return this.$store.getters.cartProducts;
   }
