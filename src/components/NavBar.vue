@@ -20,7 +20,7 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class NavBar extends Vue {
   get total() {
-    return this.$store.getters.cartItems;
+    return this.$store.getters.cartQuantity;
   }
 }
 </script>

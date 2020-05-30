@@ -54,9 +54,6 @@ import CartItem from "@/components/CartItem.vue";
   components: { CartItem }
 })
 export default class Cart extends Mixins(Currency) {
-  get cartItems() {
-    return this.$store.getters.cartItems;
-  }
 
   get products() {
     return this.$store.getters.cartProducts;

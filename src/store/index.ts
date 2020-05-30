@@ -17,7 +17,7 @@ export default new Vuex.Store({
 
   state: {
     cart: Array<CartModel>(),
-    cartItems: 0,
+    cartQuantity: 0,
     products: [
       {
         id: 1,
@@ -70,12 +70,12 @@ export default new Vuex.Store({
       }
     },
     [types.UPDATE_CART_QUANTITY](state, { quantity }) {
-      state.cartItems = quantity;
+      state.cartQuantity = quantity;
     },
     [types.REMOVE_FROM_CART](state, { product }) {
       const index = state.cart.map(item => item.id).indexOf(product.id);
       state.cart.splice(index, 1);
-      state.cartItems -= product.quantity;
+      state.cartQuantity -= product.quantity;
     },
     [types.UPDATE_ITEM_QUANTITY](state, { id, quantity }) {
       const index = state.cart.findIndex(item => item.id === id);
@@ -86,7 +86,7 @@ export default new Vuex.Store({
   getters: {
     products: state => state.products,
 
-    cartItems: state => state.cartItems,
+    cartQuantity: state => state.cartQuantity,
 
     cart: state => state.cart,
 

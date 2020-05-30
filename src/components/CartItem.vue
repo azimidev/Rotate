@@ -46,5 +46,3 @@ export default class CartItem extends Mixins(Currency) {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>
