@@ -34,10 +34,9 @@
 import { Component, Mixins, Prop } from "vue-property-decorator";
 import ProductModel from "@/models/ProductModel";
 import CartModel from "@/models/CartModel";
-// Cannot use @ with ts modules
-import Delay from "../mixins/Delay";
-import Currency from "../mixins/Currency";
-import Asset from "../mixins/Asset";
+import Delay from "@/mixins/Delay";
+import Currency from "@/mixins/Currency";
+import Asset from "@/mixins/Asset";
 
 @Component
 export default class Product extends Mixins(Delay, Currency, Asset) {

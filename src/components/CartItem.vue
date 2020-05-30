@@ -1,7 +1,7 @@
 <template>
   <tr>
-    <td>{{ product.name }}</td>
-    <td>{{ currency(product.price) }}</td>
+    <td>{{ cart.name }}</td>
+    <td>{{ currency(cart.price) }}</td>
     <td>
       <label class="select is-small">
         <select @change="updateQuantity($event.target.value)" name="quantity">
@@ -12,36 +12,38 @@
       </label>
     </td>
     <td>
-      <a @click="removeFromCart(product)">Remove</a>
+      <a class="has-text-white display-on-hover" @click="removeFromCart(cart)"
+        >Remove</a
+      >
     </td>
   </tr>
 </template>
 
 <script lang="ts">
 import { Component, Mixins, Prop } from "vue-property-decorator";
-import ProductModel from "@/models/ProductModel";
-import Currency from "../mixins/Currency";
+import CartModel from "@/models/CartModel";
+import Currency from "@/mixins/Currency";
 
 @Component
 export default class CartItem extends Mixins(Currency) {
-  @Prop({ required: true }) product!: Array<ProductModel>;
+  @Prop({ required: true }) cart!: CartModel;
 
-  quantity = this.product.quantity;
+  quantity = this.cart.quantity;
 
   mounted() {
     this.quantity = this.$store.getters.cart.find(
-      product => product.id === this.product.id
+      (cart: CartModel) => cart.id === this.cart.id
     ).quantity;
   }
 
-  updateQuantity(quantity: number) {
+  updateQuantity(quantity: string) {
     this.$store.dispatch("updateItemQuantity", {
-      product: this.product,
+      product: this.cart,
       quantity: parseInt(quantity)
     });
   }
 
-  removeFromCart(product: Array) {
+  removeFromCart(product: CartModel) {
     this.$store.dispatch("removeFromCart", product);
   }
 }

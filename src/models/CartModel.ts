@@ -1,4 +1,4 @@
 export default class CartModel {
-  id?: number;
+  id!: number;
   quantity: number = 0;
 }

@@ -26,6 +26,7 @@ export default new Vuex.Store({
   state: {
     cart: Array<CartModel>(),
     cartQuantity: 0,
+    toggleCart: false,
     products: [
       {
         id: 1,
@@ -62,6 +63,9 @@ export default new Vuex.Store({
     },
     updateItemQuantity({ commit }, { product, quantity }) {
       commit(types.UPDATE_ITEM_QUANTITY, { product, quantity });
+    },
+    toggleCart({ commit }, toggle) {
+      commit(types.TOGGLE_CART, toggle);
     }
   },
 
@@ -93,6 +97,9 @@ export default new Vuex.Store({
         state.cartQuantity -= product.quantity - quantity;
       }
       state.cart[index].quantity = quantity;
+    },
+    [types.TOGGLE_CART](state, toggle) {
+      state.toggleCart = toggle;
     }
   },
 
@@ -108,7 +115,9 @@ export default new Vuex.Store({
         const product = state.products.find(p => p.id === id);
         return { ...product, quantity };
       });
-    }
+    },
+
+    toggleCart: state => state.toggleCart
   },
 
   modules: {}
