@@ -1,9 +1,5 @@
 <template>
-  <nav
-    class="navbar is-light is-bold"
-    role="navigation"
-    aria-label="main navigation"
-  >
+  <nav class="navbar is-bold" role="navigation" aria-label="main navigation">
     <div class="navbar-brand is-flex container">
       <router-link class="navbar-item" to="/">Home</router-link>
       <a @click="toggleCart" class="navbar-item">

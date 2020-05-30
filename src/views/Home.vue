@@ -40,3 +40,9 @@ export default class Home extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+body, .navbar {
+  background-color: #fffef2;
+}
+</style>
