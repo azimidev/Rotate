@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="display-link-on-hover">
     <td>{{ cart.name }}</td>
     <td>{{ currency(cart.price) }}</td>
     <td>
@@ -48,3 +48,17 @@ export default class CartItem extends Mixins(Currency) {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.display-on-hover {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s linear, opacity 0.1s linear;
+}
+.display-link-on-hover:hover {
+  .display-on-hover {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+</style>
