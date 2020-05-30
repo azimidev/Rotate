@@ -79,7 +79,7 @@ export default new Vuex.Store({
     },
     [types.UPDATE_ITEM_QUANTITY](state, { id, quantity }) {
       const index = state.cart.findIndex(item => item.id === id);
-      state.cart[index].quantity = parseInt(quantity);
+      state.cart[index].quantity = quantity;
     }
   },
 
