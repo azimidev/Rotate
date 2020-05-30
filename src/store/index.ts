@@ -1,11 +1,19 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VuexPersist from "vuex-persist";
 import * as types from "./types";
 import CartModel from "@/models/CartModel";
 
 Vue.use(Vuex);
 
+// debug the app based on environment
 const debug = process.env.NODE_ENV !== "production";
+
+// Use Vuex Persist to persist in local storage
+const vuexPersist = new VuexPersist({
+  key: "rotate-app",
+  storage: window.localStorage
+});
 
 /* NOTE:
  *  I have used single file store because the app is simple,
@@ -14,7 +22,7 @@ const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
   strict: debug,
-
+  plugins: [vuexPersist.plugin], // --> with this plugin we store in local storage
   state: {
     cart: Array<CartModel>(),
     cartQuantity: 0,

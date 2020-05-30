@@ -6,7 +6,7 @@
       </h1>
     </div>
     <div class="column">
-      <img :src="getImg(product.img)" :alt="product.img" />
+      <img :src="asset(product.img)" :alt="product.img" />
     </div>
     <div class="column">
       <h3 class="title">
@@ -37,17 +37,13 @@ import CartModel from "@/models/CartModel";
 // Cannot use @ with ts modules
 import Delay from "../mixins/Delay";
 import Currency from "../mixins/Currency";
+import Asset from "../mixins/Asset";
 
 @Component
-export default class Product extends Mixins(Delay, Currency) {
+export default class Product extends Mixins(Delay, Currency, Asset) {
   @Prop({ required: true }) product!: Array<ProductModel>;
 
   disabled = false;
-
-  getImg(product: ProductModel) {
-    const images = require.context("../assets/");
-    return images("./" + product);
-  }
 
   async addToCart(product: ProductModel) {
     // disable the button

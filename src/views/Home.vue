@@ -2,7 +2,7 @@
   <section class="hero is-fullheight is-vcentered">
     <div class="hero-body">
       <div class="container">
-        <Product :product.sync="activeProduct" />
+        <Product :product="activeProduct" />
         <div class="control has-text-centered">
           <label
             class="radio"

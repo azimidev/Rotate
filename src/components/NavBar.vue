@@ -4,7 +4,7 @@
     role="navigation"
     aria-label="main navigation"
   >
-    <div class="navbar-brand">
+    <div class="navbar-brand is-flex">
       <router-link class="navbar-item" to="/">Home</router-link>
       <router-link class="navbar-item" to="/cart">
         Cart
@@ -24,3 +24,9 @@ export default class NavBar extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.navbar-brand {
+  justify-content: space-between;
+}
+</style>
