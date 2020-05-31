@@ -2,7 +2,7 @@
   <section class="hero is-fullheight is-vcentered">
     <div class="hero-body">
       <div class="container">
-        <Product :product="activeProduct" />
+        <Product :product.sync="activeProduct" />
         <div class="control has-text-centered">
           <label
             class="radio"
@@ -32,8 +32,16 @@ import ProductModel from "@/models/ProductModel";
   components: { Product }
 })
 export default class Home extends Vue {
-  products: Array<ProductModel> = this.$store.getters.products;
   activeProduct: ProductModel = this.products[0];
+
+  // async created() {
+  //   await this.$store.dispatch("fetchProducts");
+  //   this.activeProduct = this.products[0];
+  // }
+
+  get products() {
+    return this.$store.getters.products;
+  }
 
   updateProduct(product: ProductModel) {
     this.activeProduct = product;

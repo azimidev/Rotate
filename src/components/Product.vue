@@ -40,7 +40,7 @@ import Asset from "@/mixins/Asset";
 
 @Component
 export default class Product extends Mixins(Delay, Currency, Asset) {
-  @Prop({ required: true }) product!: Array<ProductModel>;
+  @Prop({ required: true }) product!: ProductModel;
 
   disabled = false;
 
@@ -69,5 +69,3 @@ export default class Product extends Mixins(Delay, Currency, Asset) {
   }
 }
 </script>
-
-<style scoped lang="scss"></style>

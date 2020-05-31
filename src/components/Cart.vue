@@ -1,5 +1,5 @@
 <template>
-  <section class="hero is-dark is-bold">
+  <section class="hero is-black">
     <a @click.prevent="closeCart" class="delete is-large"></a>
     <div class="hero-body">
       <div class="container">

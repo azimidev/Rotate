@@ -1,5 +1,5 @@
-import Vue from "vue";
-import Component from "vue-class-component";
+import { Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 
 @Component
 export default class Asset extends Vue {

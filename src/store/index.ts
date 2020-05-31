@@ -4,6 +4,7 @@ import VuexPersist from "vuex-persist";
 import * as types from "./types";
 import CartModel from "@/models/CartModel";
 import ProductModel from "@/models/ProductModel";
+// import Axios from "axios";
 
 Vue.use(Vuex);
 
@@ -23,33 +24,34 @@ const vuexPersist = new VuexPersist({
 
 export default new Vuex.Store({
   strict: debug,
-  plugins: [vuexPersist.plugin], // --> with this plugin we store in local storage
+  // plugins: [vuexPersist.plugin], // --> with this plugin we store in local storage
   state: {
-    cart: Array<CartModel>(), // -->  this is our basic cart, I store product ID and quantity for each product
+    cart: Array<CartModel>(), // --> this is our basic cart, I store product ID and quantity for each product
     cartQuantity: 0, // --> this is the total number items in the cart
     toggleCart: false, // --> with this we can toggle showing the cart on and off
     products: require("../mocks/products.json") // --> mock API or we could use action and Axios to call the API
+    // products: Array<ProductModel>()
   },
 
-  actions: {
-    addToCart({ commit }, product) {
-      commit(types.ADD_TO_CART, { id: product.id });
+  getters: {
+    products: state => state.products,
+    cartQuantity: state => state.cartQuantity,
+    cart: state => state.cart,
+
+    cartProducts: state => {
+      return state.cart.map(({ id, quantity }: CartModel) => {
+        const product = state.products.find((p: ProductModel) => p.id === id);
+        return { ...product, quantity };
+      });
     },
-    updateCartItems({ commit }, quantity) {
-      commit(types.UPDATE_CART_QUANTITY, { quantity });
-    },
-    removeFromCart({ commit }, product) {
-      commit(types.REMOVE_FROM_CART, { product });
-    },
-    updateItemQuantity({ commit }, { product, quantity }) {
-      commit(types.UPDATE_ITEM_QUANTITY, { product, quantity });
-    },
-    toggleCart({ commit }, toggle) {
-      commit(types.TOGGLE_CART, toggle);
-    }
+
+    toggleCart: state => state.toggleCart
   },
 
   mutations: {
+    [types.SET_PRODUCTS](state, products) {
+      state.products = products;
+    },
     [types.ADD_TO_CART](state, { id }) {
       const record = state.cart.find(product => product.id === id);
       if (!record) {
@@ -98,19 +100,32 @@ export default new Vuex.Store({
     }
   },
 
-  getters: {
-    products: state => state.products,
-    cartQuantity: state => state.cartQuantity,
-    cart: state => state.cart,
-
-    cartProducts: state => {
-      return state.cart.map(({ id, quantity }: CartModel) => {
-        const product = state.products.find((p: ProductModel) => p.id === id);
-        return { ...product, quantity };
-      });
+  actions: {
+    // fetchProducts({ commit }) {
+    //   return new Promise(resolve => {
+    //     Axios.get("http://www.mocky.io/v2/5ed3d303340000580001f4eb").then(
+    //       ({ data }) => {
+    //         commit(types.SET_PRODUCTS, data);
+    //         resolve(data);
+    //       }
+    //     );
+    //   });
+    // },
+    addToCart({ commit }, product) {
+      commit(types.ADD_TO_CART, { id: product.id });
     },
-
-    toggleCart: state => state.toggleCart
+    updateCartItems({ commit }, quantity) {
+      commit(types.UPDATE_CART_QUANTITY, { quantity });
+    },
+    removeFromCart({ commit }, product) {
+      commit(types.REMOVE_FROM_CART, { product });
+    },
+    updateItemQuantity({ commit }, { product, quantity }) {
+      commit(types.UPDATE_ITEM_QUANTITY, { product, quantity });
+    },
+    toggleCart({ commit }, toggle) {
+      commit(types.TOGGLE_CART, toggle);
+    }
   },
 
   modules: {}
