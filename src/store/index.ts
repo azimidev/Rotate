@@ -24,7 +24,7 @@ const vuexPersist = new VuexPersist({
 
 export default new Vuex.Store({
   strict: debug,
-  // plugins: [vuexPersist.plugin], // --> with this plugin we store in local storage
+  plugins: [vuexPersist.plugin], // --> with this plugin we store in local storage
   state: {
     cart: Array<CartModel>(), // --> this is our basic cart, I store product ID and quantity for each product
     cartQuantity: 0, // --> this is the total number items in the cart
