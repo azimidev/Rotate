@@ -39,4 +39,8 @@ yarn lint
 - I could extract the Store into modules, but the app didn't need that complexity.
 - I could have used Jest and Vue-test-utils to write some test.
 
+- URL you have given me to replicate: https://www.aesop.com/uk/p/skin/cleanse/in-two-minds-facial-cleanser/
+- Screen shot of what I produced:
+[]()
+
 #### Time spent: 5 hours
