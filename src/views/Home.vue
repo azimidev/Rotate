@@ -32,18 +32,13 @@ import ProductModel from "@/models/ProductModel";
   components: { Product }
 })
 export default class Home extends Vue {
-  activeProduct: ProductModel = this.products[0];
+  private activeProduct: ProductModel = this.products[0];
 
-  // async created() {
-  //   await this.$store.dispatch("fetchProducts");
-  //   this.activeProduct = this.products[0];
-  // }
-
-  get products() {
+  private get products(): Array<ProductModel> {
     return this.$store.getters.products;
   }
 
-  updateProduct(product: ProductModel) {
+  private updateProduct(product: ProductModel): void {
     this.activeProduct = product;
   }
 }

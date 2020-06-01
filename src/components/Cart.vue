@@ -47,22 +47,23 @@ import { Component, Mixins } from "vue-property-decorator";
 import Currency from "@/mixins/Currency";
 import CartItem from "@/components/CartItem.vue";
 import Delay from "@/mixins/Delay";
+
 @Component({
   components: { CartItem }
 })
 export default class Cart extends Mixins(Currency, Delay) {
-  async mounted() {
+  async mounted(): Promise<void> {
     if (!this.products.length) {
       await this.delay(1);
       this.closeCart();
     }
   }
 
-  get products() {
+  private get products() {
     return this.$store.getters.cartProducts;
   }
 
-  get total() {
+  private get total(): number {
     return this.products.reduce(
       (total: number, p: { price: number; quantity: number }) => {
         return total + p.price * p.quantity;
@@ -71,13 +72,13 @@ export default class Cart extends Mixins(Currency, Delay) {
     );
   }
 
-  closeCart() {
+  private closeCart(): void {
     this.$store.dispatch("toggleCart", false);
   }
 
-  checkout() {
+  private checkout(): void {
     alert(`Please pay us ${this.currency(this.total)}`);
-    // TODO: clear the cart
+    // clear the cart
   }
 }
 </script>

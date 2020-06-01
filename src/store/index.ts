@@ -8,9 +8,6 @@ import ProductModel from "@/models/ProductModel";
 
 Vue.use(Vuex);
 
-// debug the app based on environment
-const debug = process.env.NODE_ENV !== "production";
-
 // Use Vuex Persist to persist in local storage
 const vuexPersist = new VuexPersist({
   key: "rotate-app",
@@ -23,13 +20,12 @@ const vuexPersist = new VuexPersist({
  */
 
 export default new Vuex.Store({
-  strict: debug,
-  plugins: [vuexPersist.plugin], // --> with this plugin we store in local storage
+  // plugins: [vuexPersist.plugin], // --> with this plugin we store in local storage
   state: {
     cart: Array<CartModel>(), // --> this is our basic cart, I store product ID and quantity for each product
     cartQuantity: 0, // --> this is the total number items in the cart
     toggleCart: false, // --> with this we can toggle showing the cart on and off
-    products: require("../mocks/products.json") // --> mock API or we could use action and Axios to call the API
+    products: require("@/apis/products.json") // --> get API or we could use Axios
     // products: Array<ProductModel>()
   },
 
@@ -52,6 +48,7 @@ export default new Vuex.Store({
     [types.SET_PRODUCTS](state, products) {
       state.products = products;
     },
+
     [types.ADD_TO_CART](state, { id }) {
       const record = state.cart.find(product => product.id === id);
       if (!record) {
@@ -75,6 +72,10 @@ export default new Vuex.Store({
       state.cart.splice(index, 1);
       // adjust the cart quantity
       state.cartQuantity -= product.quantity;
+      // close the cart if no item
+      if (!state.cartQuantity) {
+        state.toggleCart = false;
+      }
     },
 
     [types.UPDATE_ITEM_QUANTITY](state, { product, quantity }) {
@@ -101,15 +102,15 @@ export default new Vuex.Store({
   },
 
   actions: {
-    // fetchProducts({ commit }) {
-    //   return new Promise(resolve => {
-    //     Axios.get("http://www.mocky.io/v2/5ed3d303340000580001f4eb").then(
-    //       ({ data }) => {
-    //         commit(types.SET_PRODUCTS, data);
-    //         resolve(data);
-    //       }
-    //     );
-    //   });
+    // async fetchProducts({ commit }) {
+    // return new Promise(resolve => {
+    // Axios.get("http://www.mocky.io/v2/5ed3d303340000580001f4eb").then(
+    //   ({ data }) => {
+    //     commit(types.SET_PRODUCTS, data);
+    // resolve(data);
+    // }
+    // );
+    // });
     // },
     addToCart({ commit }, product) {
       commit(types.ADD_TO_CART, { id: product.id });

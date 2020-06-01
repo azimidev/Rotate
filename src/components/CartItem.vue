@@ -28,22 +28,22 @@ import Currency from "@/mixins/Currency";
 export default class CartItem extends Mixins(Currency) {
   @Prop({ required: true }) cart!: CartModel;
 
-  quantity = this.cart.quantity;
+  private quantity = this.cart.quantity;
 
-  mounted() {
+  mounted(): void {
     this.quantity = this.$store.getters.cart.find(
       (cart: CartModel) => cart.id === this.cart.id
     ).quantity;
   }
 
-  updateQuantity(quantity: string) {
+  private updateQuantity(quantity: string): void {
     this.$store.dispatch("updateItemQuantity", {
       product: this.cart,
       quantity: parseInt(quantity)
     });
   }
 
-  removeFromCart(product: CartModel) {
+  private removeFromCart(product: CartModel): void {
     this.$store.dispatch("removeFromCart", product);
   }
 }

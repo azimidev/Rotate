@@ -1,4 +1,4 @@
-export default class CartModel {
-  id!: number;
-  quantity: number = 0;
+export default interface CartModel {
+  id: number;
+  quantity: number;
 }

@@ -42,9 +42,9 @@ import Asset from "@/mixins/Asset";
 export default class Product extends Mixins(Delay, Currency, Asset) {
   @Prop({ required: true }) product!: ProductModel;
 
-  disabled = false;
+  private disabled = false;
 
-  async addToCart(product: ProductModel) {
+  private async addToCart(product: ProductModel): Promise<void> {
     // disable the button
     this.disabled = true;
 

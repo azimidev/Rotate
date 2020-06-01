@@ -10,16 +10,16 @@
   </div>
 </template>
 
-<script>
-import NavBar from "@/components/NavBar.vue";
+<script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Cart from "@/components/Cart";
+import NavBar from "@/components/NavBar.vue";
+import Cart from "@/components/Cart.vue";
 
 @Component({
-  components: { Cart, NavBar }
+  components: { NavBar, Cart }
 })
 export default class App extends Vue {
-  get toggleCart() {
+  private get toggleCart(): boolean {
     return this.$store.getters.toggleCart;
   }
 }

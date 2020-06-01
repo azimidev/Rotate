@@ -15,11 +15,11 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class NavBar extends Vue {
-  get total() {
+  private get total(): number {
     return this.$store.getters.cartQuantity;
   }
 
-  toggleCart() {
+  private toggleCart(): Promise<boolean> {
     return this.$store.dispatch("toggleCart", !this.$store.state.toggleCart);
   }
 }
