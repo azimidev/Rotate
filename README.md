@@ -41,6 +41,7 @@ yarn lint
 
 - URL you have given me to replicate: https://www.aesop.com/uk/p/skin/cleanse/in-two-minds-facial-cleanser/
 - Screen shot of what I produced:
-[]()
+![1](./screenshots/1.png)
+![2](./screenshots/2.png)
 
 #### Time spent: 5 hours
