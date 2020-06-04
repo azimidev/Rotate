@@ -11,7 +11,6 @@
           >
             <input
               type="radio"
-              name="answer"
               @change="updateProduct(product)"
               :checked="product.id === activeProduct.id"
             />

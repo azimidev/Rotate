@@ -18,9 +18,7 @@ describe("Home.vue", () => {
     store = new Vuex.Store({
       getters
     });
-  });
 
-  test("renders props.product when passed", () => {
     wrapper = mount(Home, {
       store,
       localVue,
@@ -30,6 +28,18 @@ describe("Home.vue", () => {
         };
       }
     });
+  });
+
+  test("should render active product upon mounting", () => {
     expect(wrapper.text()).toMatch(products[0].name);
+  });
+
+  test("should update product when switching", () => {
+    wrapper
+      .find("input[type=radio]")
+      .setChecked(true)
+      .then(() => {
+        expect(wrapper.text()).toMatch(products[1].name);
+      });
   });
 });
